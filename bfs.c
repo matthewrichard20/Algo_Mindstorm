@@ -1,14 +1,26 @@
 //
-//  dfs.c
+//  bfs.c
 //  Algo_Mindstorm
 //
 //  Created by Richard Matthew on 3/21/17.
 //  Copyright © 2017 MatthewRichard20. All rights reserved.
 //
 
-#include "dfs.h"
+#include "bfs.h"
 
-void dfs()
+void mainbfs()
+{
+  Stack S;
+  boolean win = false;
+  
+  bfs(&S);
+  while (IsEmpty(S))
+  {
+    bfs(&S, win);
+  }
+  
+}
+void bfs(Stack S, boolean win)
 {
   paddress Pt;
   float sudut;
@@ -31,7 +43,6 @@ void dfs()
       case red:
       {
         moveback();
-        return false;
       }
         break;
       case green:
@@ -55,30 +66,18 @@ void dfs()
           {
             if (Next1(P) != Nil)
             {
-              rotate(Next1(P).sudut);
-
-              dfs(Next1(P));
-              moveback();
-              rotate(-(Next1(P).sudut));
+              bfs(Next1(P));
             }
             if (Next2(P) != Nil)
             {
-              rotate(Next2(P).sudut);
-              
-              dfs(Next2(P));
-              moveback();
-              rotate(-(Next2(P).sudut));
+              bfs(Next2(P));
             }
             if (Next3(P) != Nil)
             {
-              rotate(Next3(P).sudut);
-              
-              dfs(Next3(P));
-              moveback();
-              rotate(-(Next3(P).sudut));
+              bfs(Next3(P));
             }
           }
-          
+
         }
       }
         break;
@@ -91,7 +90,7 @@ void dfs()
     
     
     
-  }
+      }
 }
 
 void move()
